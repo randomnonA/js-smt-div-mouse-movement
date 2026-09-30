@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Untitled</title>
+    <style>
+      #mydiv {
+        position: absolute;
+        z-index: 9;
+        background-color: lightblue;
+        text-align: center;
+        border: 1px dashed gray;
+        
+      }
+      
+      #mydivheader {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+        background-color: red;
+        color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mydiv">
+      <div id="mydivheader">
+        <p>
+          MOVE
+        </p>
+        <p>
+          THIS
+        </p>
+        <p>
+          <b>DIV!</b>
+        </p>
+      </div>
+    </div>
+    
+    <script>
+      //make draggable
+      dragElement(document.getElementById("mydiv"));
+      function dragElement (element) {
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        if (document.getElementById(element.id) + "header"){
+          document.getElementById(element.id + "header").onmousedown = dragMouseDown; 
+        }
+        else {
+          element.onmousedown = dragMouseDown;
+        }
+        function dragMouseDown (e){
+          e = e || window.event;
+          e.preventDefault();
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = closeDragElement;
+          document.onmousemove = elementDrag;
+        }
+        function elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          element.style.top = (element.offsetTop - pos2) + "px";
+          element.sytel.left = (element.offsetLeft - pos1) + "px";
+        }
+        function closeDragElement() {
+          //stop moving when the mouse is released
+          document.onmouseup = null;
+          document.onmousermove = null;
+          
+        }
+      }
+
+    </script>
+  </body>
+</html>
