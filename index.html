@@ -57,11 +57,17 @@
         function elementDrag(e) {
           e = e || window.event;
           e.preventDefault();
+          //calculates the new cursors psoition
           pos1 = pos3 - e.clientX;
           pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          //set the elements new position
           element.style.top = (element.offsetTop - pos2) + "px";
           element.sytel.left = (element.offsetLeft - pos1) + "px";
+
         }
+        
         function closeDragElement() {
           //stop moving when the mouse is released
           document.onmouseup = null;
